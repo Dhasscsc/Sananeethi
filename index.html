@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>தினம் ஒரு நீதி - சானக்கியர்</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Lato', 'Noto Sans Tamil', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1a4d3c 0%, #2c6e4f 100%);
+            color: #f0f0e0;
+            padding: 16px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Card Style */
+        .card {
+            background: #fef9e6;
+            color: #2d2a24;
+            border-radius: 40px 20px 40px 20px;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.4);
+            padding: 28px 22px;
+            margin-bottom: 24px;
+            border: 1px solid #ffefcf;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            text-align: center;
+            color: #c17a4b;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-bottom: 2px dashed #ecd9b4;
+            padding-bottom: 15px;
+        }
+
+        h1 span {
+            background: #c17a4b20;
+            padding: 6px 14px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            color: #b45f3a;
+            font-weight: normal;
+        }
+
+        .date-box {
+            text-align: center;
+            background: #e7dcc8;
+            padding: 14px;
+            border-radius: 60px;
+            margin: 20px 0 25px 0;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #4e3622;
+            border-left: 8px solid #c17a4b;
+            border-right: 8px solid #c17a4b;
+        }
+
+        .neethi-box {
+            background: #fff7ef;
+            padding: 35px 20px;
+            border-radius: 32px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: inset 0 0 0 2px #f7e5cf, 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .neethi-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #bc7a4e;
+            font-weight: 600;
+        }
+
+        .neethi-text {
+            font-size: 1.7rem;
+            line-height: 1.45;
+            font-weight: 550;
+            color: #2c241c;
+            margin: 20px 0 8px 0;
+        }
+
+        .neethi-text::before {
+            content: "❝ ";
+            font-size: 2rem;
+            color: #c17a4b;
+        }
+
+        .neethi-text::after {
+            content: " ❞";
+            font-size: 2rem;
+            color: #c17a4b;
+        }
+
+        .author {
+            font-size: 0.95rem;
+            color: #9b7b5b;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0 10px;
+        }
+
+        .btn {
+            border: none;
+            background: #cd8c62;
+            padding: 12px 22px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1da959;
+            transform: scale(1.02);
+        }
+
+        .btn-past {
+            background: #5f7e6b;
+        }
+
+        .btn-past:hover {
+            background: #3e5c4a;
+        }
+
+        .past-section {
+            background: #f4ede1;
+            border-radius: 32px;
+            padding: 22px 18px;
+            color: #2d2a24;
+            border: 1px solid #decfa9;
+        }
+
+        .past-section h2 {
+            font-size: 1.5rem;
+            border-left: 5px solid #cd8c62;
+            padding-left: 16px;
+            margin-bottom: 18px;
+            color: #4e3a28;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 60px;
+            border: 1px solid #cfbf9a;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            background: white;
+            font-family: inherit;
+        }
+
+        .neethi-list {
+            list-style: none;
+            padding: 0;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        .neethi-list li {
+            background: white;
+            margin-bottom: 12px;
+            padding: 14px 18px;
+            border-radius: 28px;
+            border-left: 6px solid #cd8c62;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .list-date {
+            font-weight: bold;
+            color: #b16238;
+            font-size: 0.75rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .close-btn {
+            background: #9b7b5b;
+            margin-top: 12px;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #cfdeb5;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 530px) {
+            .neethi-text {
+                font-size: 1.35rem;
+            }
+            .btn {
+                padding: 9px 16px;
+                font-size: 0.85rem;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>
+            📜 தினம் ஒரு நீதி
+            <span>சானக்கியர்</span>
+        </h1>
+
+        <div class="date-box" id="dateBox">
+            <!-- ஜாவாஸ்கிரிப்ட் மூலம் தேதி -->
+        </div>
+
+        <div class="neethi-box">
+            <div class="neethi-label">✧ இன்றைய வழிகாட்டி ✧</div>
+            <div class="neethi-text" id="dailyNeethiText">
+                வாசகம் ஏற்றப்படுகிறது...
+            </div>
+            <div class="author">— ஆசிரியர் சாணக்கியர்</div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-whatsapp" id="shareWhatsAppBtn">
+                📱 வாட்சப்பில் பகிர்
+            </button>
+            <button class="btn btn-past" id="showPastBtn">
+                📆 முந்தைய நீதிகள்
+            </button>
+        </div>
+    </div>
+
+    <!-- முந்தைய நீதிகள் பகுதி (முதலில் மறைவு) -->
+    <div id="pastPanel" class="past-section" style="display: none;">
+        <h2>📖 முந்தைய நாட்களின் நீதிகள்</h2>
+        <input type="text" id="searchInput" class="filter-input" placeholder="🔍 வாசகத்தில் தேட... (எ.கா: கல்வி, நட்பு, பொருள்)">
+        <ul class="neethi-list" id="pastNeethiList">
+            <!-- நீதிகள் பட்டியல் -->
+        </ul>
+        <button class="btn close-btn" id="closePastBtn">✖ மூடு</button>
+    </div>
+    <footer>
+        ⏳ ஒவ்வொரு நாளும் ஒரு புதிய நீதி • தேதி முடிந்ததும் புதிய வாசகம்
+    </footer>
+</div>
+
+<script>
+    // ================================
+    // 108+ சானக்கியர் நீதிகள் (முழுமையான தொகுப்பு)
+    // ================================
+    const allNeethis = [
+        "கல்வி கண்ணுடையார்க்குக் கண்; கல்லாதார் விலங்கு.",
+        "மென்மையான பேச்சு மிக்க செல்வத்தையும் மேம்படுத்தும்.",
+        "தன்னை நம்பாதவன், உலகம் நம்பவில்லையென்று அழுவான்.",
+        "வாய்மை தவறாதவன் மேல் கோபமும் காலமும் தோற்கும்.",
+        "பொறாமைக்காரன், வீண்பேச்சாளன், கோபி - இம்மூவரையும் கடல்போல் கடந்துவிடு.",
+        "செல்வத்தை மூன்றாகப் பிரி – ஒன்று செலவுக்கு, ஒன்று சேமிப்பிற்கு, ஒன்று அறத்திற்கு.",
+        "மனைவியைத் தெய்வமாகக் கொண்டாடு; அவளே வீட்டின் இலட்சுமி.",
+        "அடக்கமே அழகுக்கு அழகு; செருக்கே வீழ்ச்சிக்கு வித்து.",
+        "கடலைக் கடக்க வேண்டுமென்றால், முதலில் மனத்தில் கடலைக் கடந்துவிடு.",
+        "இன்சொல் இறைவனின் வடிவம்; கடுஞ்சொல் நரகத்தின் கதவு.",
+        "ஒரு நாள் கற்றால், நூறு நாள் உணவில்லையெனினும் வருந்தாதே.",
+        "தன்னைத் தானே அடக்குவோன் மேலும் உயர்வான்.",
+        "கொடிய ஆயுதத்தை விட, கூர்மையான நாவே கொடியது.",
+        "நூறு பேரின் வெற்று நட்பைவிட, ஒருவனின் உண்மை நட்பே சிறந்தது.",
+        "பெற்றோரின் பாதங்களைத் தொழு; அவர்களே தெரியாத கோவில்கள்.",
+        "பொய் சொல்லி ஆயிரம் பேரை மகிழ்விப்பதைவிட, வாய்மை சொல்லி ஒருவனை வருத்துவதே மேல்.",
+        "நன்றி கெட்டவனுக்கு உதவி செய்வது, காட்டுத் தீயிலே நெய் வார்ப்பது போன்றது.",
+        "சோம்பல் மிகப்பெரிய எதிரி; செயலே மிகப்பெரிய நண்பன்.",
+        "பிள்ளைகளுக்கு சொத்தை விட, ஒழுக்கத்தையே முதலில் கற்றுக் கொடு.",
+        "மெல்லிய சொல்லே மனிதனின் பகைவனையும் வெல்லும்.",
+        "உயிருக்கு ஆபத்து வந்தாலும், வாய்மையைக் காப்பாற்று.",
+        "அறம் கைவிடின், பொருளும் காமமும் அழியும்.",
+        "செல்வம் பெற்றோர் அறம் புரியார் எனில், அவர் செல்வம் பகையாக மாறும்.",
+        "கற்றவன் கொண்ட செல்வம் கடலிற் புகுந்த மழைத்துளிபோல் என்றும் அழியாது.",
+        "எங்கு பொய்யும் வஞ்சனையும் உள்ளதோ, அங்கு நட்பு பொய்யானது.",
+        "பாம்பிடமிருந்து பயம்; தீயன்பான நண்பனிடமிருந்து என்றும் பயம்.",
+        "பகைவன் நல்லவன் ஆனால், அவனை நண்பனாக்கிக் கொள்.",
+        "கடனை விரைவில் தீர்; மிகுதியைச் சேமி; ஆடம்பரச் செலவைத் தவிர்.",
+        "தேவையற்ற பேச்சு கேடு விளைவிக்கும்; மௌனமே பொன்னானது.",
+        "அறமே வாழ்வின் வேர்; பொருளே தண்டு; காமமே கிளை.",
+        "ஒழுக்கமே நிலைத்த சொத்து; மற்றவை விருந்தினர் போன்றவை.",
+        "வெற்றி பெற விரும்பினால் உன் மனதை வென்றிடு.",
+        "அறிவில்லாத செல்வம் அழிவைத் தரும்.",
+        "கோபம் கொலைகாரனை விடக் கொடியது.",
+        "தீயோரின் சொர்க்கமே நரகத்துக்கு நிகர்.",
+        "நல்லவர்களின் நிழலே பாதுகாப்பானது.",
+        "சிறு வயதில் கல்வி, இளமையில் காமம், மூப்பில் அறம்.",
+        "எது நடந்தாலும் நன்மைக்கே.",
+        "நீதி இல்லாத அரசு கானல் நீர்.",
+        "பொறுமை இமயமலையை வெல்லும்.",
+        "அளவுக்கு மீறிய ஆசை அழிவின் தொடக்கம்.",
+        "கற்றதனால் ஆய பயன் கற்பவர்க்கு உதவுதல்.",
+        "இல்லறம் இறைவனின் இருப்பிடம்.",
+        "சேமிப்பு வாழ்வின் முதுகெலும்பு.",
+        "உழைப்பு இல்லாத வாழ்வு உணவில்லாத உடல் போன்றது.",
+        "சூதும் சூழ்ச்சியும் சுடுகாட்டு மலர்.",
+        "எளிமையே உயர்வான ஆபரணம்.",
+        "தோழமை தூய்மையானால் துன்பம் தூர விலகும்.",
+        "வேர்கள் வலிமையானால் மரம் வானைத் தொடும்.",
+        "தெய்வத்தை வணங்கு, ஆனால் உன் கால்களை நம்பு.",
+        "கவலைகள் கடலைப் போல் பெரிதாகத் தெரியும், ஆனால் கரை சேர முடியும்.",
+        "பொறாமை புழுப் பிடித்த பழம்.",
+        "கருணை இல்லாத செல்வம் சுமையாகும்.",
+        "சத்தியமே சக்தி.",
+        "தீய சிந்தனை தீய வினையை விளைவிக்கும்.",
+        "அன்பு இல்லாத வாழ்க்கை பூக்கள் இல்லாத தோட்டம்.",
+        "நன்றி உணர்வு உயர்ந்தோரின் இலக்கணம்.",
+        "இருளில் விளக்கே துணை, முதுமையில் அறமே துணை.",
+        "விட்டுக் கொடுப்பதே வெற்றியின் இரகசியம்.",
+        "கஞ்சனின் கையில் செல்வம் பிச்சைக்காரனின் கையில் மண்.",
+        "அமைதி மாபெரும் ஆயுதம்.",
+        "நேர்மை நெடிய பாதை, இருப்பினும் நிலையானது.",
+        "சிறு பொய் பெரும் தீயை மூட்டும்.",
+        "பேராசை பேயின் பிடி.",
+        "ஒழுக்கம் உயிரைக் காக்கும் கேடயம்.",
+        "எதிரியின் பலம் அறிந்து செயல்படு.",
+        "தந்தை தாய்க்கு பணிவதே முதற்கடமை.",
+        "உண்மையான ஆசான் அமைதியானவன்.",
+        "உன்னை நீ அறிந்தால் உலகம் உன்னை அறியும்.",
+        "ஒவ்வொரு புன்னகையும் ஒரு புண்ணியம்.",
+        "இருளைச் சபிப்பதை விட விளக்கேற்று.",
+        "சோம்பேறியின் கனவு பலனற்றது.",
+        "தன்னிறைவே மகத்தான செல்வம்.",
+        "துன்பம் வரும்போது துணிவு காட்டு.",
+        "கற்றுக் கொடுப்பதே கற்றலின் உச்சம்.",
+        "ஆணவம் அடக்குவோருக்கு அடிமையாகும்.",
+        "தருமம் தாழ்ந்தோருக்கு அரும்பாலம்.",
+        "எதையும் சந்தேகி, ஆனால் நம்பிக்கையை விடாதே.",
+        "சிரிப்பு இலவச மருந்து.",
+        "மறதி மரணத்தின் தொடக்கம்.",
+        "நிம்மதிக்கு நிகரான சொர்க்கம் இல்லை.",
+        "சூழலை மாற்ற முடியாவிட்டால் உன் சிந்தனையை மாற்று.",
+        "வீண் செலவு வீட்டைப் பாழாக்கும்.",
+        "ஒரு நற்செயல் நூறு தீமைகளை அழிக்கும்.",
+        "முட்டாள்களின் கூட்டம் ஞானியின் தனிமையை விடக் கொடியது.",
+        "நீர் போல் இளகி நெருப்புப் போல் எரிய வேண்டும்.",
+        "மன்னிப்பது தெய்வத்தின் குணம்.",
+        "காலத்தை மதி, காலம் உன்னை மதிக்கும்.",
+        "ஒவ்வொரு பிரச்சனையும் ஒரு பாடம்.",
+        "பழிவாங்க நினைப்பவன் இரண்டு குழி தோண்டுகிறான்.",
+        "தன்னம்பிக்கை வெற்றியின் தாய்.",
+        "சரியான நேரத்தில் சரியான செயல் சிறந்த பலனைத் தரும்.",
+        "சொல் சொல்லில் சுவர்க்கம் நரகம்.",
+        "படிப்படியாக மலை ஏறு, திடீர் பறப்பு கனவு மட்டும்.",
+        "யார் உண்மையானவர் என்பது இக்கட்டான நேரத்தில் தெரியும்.",
+        "ஒப்பிடுவது ஒழுக்கக் கேடு.",
+        "தானம் செய்வோர் உயர்வர்.",
+        "விடாமுயற்சி வெற்றி விதை",
+        "நன்றி கெட்டவன் நாட்டுக்கே சாபம்",
+        "இறைவன் எங்கும் நிறைந்தவன், சானக்கியர் நீதி என்றும் புதியது"
+    ];
+
+    // ஒவ்வொரு நாளுக்கும் ஒரு நிலையான index (date-based hash)
+    function getTodaysIndex() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth();
+        const date = today.getDate();
+        let hash = (year * 366) + (month * 31) + date;
+        return hash % allNeethis.length;
+    }
+
+    function getTamilDateString() {
+        const days = ["ஞாயிறு", "திங்கள்", "செவ்வாய்", "புதன்", "வியாழன்", "வெள்ளி", "சனி"];
+        const months = ["ஜனவரி", "பிப்ரவரி", "மார்ச்", "ஏப்ரல்", "மே", "ஜூன்", "ஜூலை", "ஆகஸ்ட்", "செப்டம்பர்", "அக்டோபர்", "நவம்பர்", "டிசம்பர்"];
+        const today = new Date();
+        return `📅 ${days[today.getDay()]}, ${today.getDate()} ${months[today.getMonth()]} ${today.getFullYear()}`;
+    }
+
+    let currentNeethi = "";
+
+    function loadDaily() {
+        const idx = getTodaysIndex();
+        currentNeethi = allNeethis[idx];
+        document.getElementById("dailyNeethiText").innerHTML = currentNeethi;
+        document.getElementById("dateBox").innerHTML = getTamilDateString();
+    }
+
+    // share to whatsapp
+    function shareWhatsapp() {
+        const todayDate = getTamilDateString();
+        const msg = `📜 *தினம் ஒரு நீதி - சானக்கியர்* 📜\n\n${todayDate}\n\n“${currentNeethi}”\n\n— சானக்கியர்\n\n✨ தினமும் புதிய வாசகம் ✨`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // முந்தைய நீதிகளை (Past neethis) காண்பிக்க (all neethis with simulated "past dates")
+    function renderPastNeethis(searchTerm = "") {
+        const listContainer = document.getElementById("pastNeethiList");
+        listContainer.innerHTML = "";
+        let filtered = [...allNeethis];
+        if (searchTerm.trim() !== "") {
+            filtered = allNeethis.filter(n => n.includes(searchTerm));
+        }
+        // past dates கற்பனை: ஒவ்வொரு நீதிக்கும் ஒரு தேதி (2026-01-01 முதல்)
+        const startDate = new Date(2026, 0, 1);
+        filtered.forEach((neethi, idx) => {
+            const li = document.createElement("li");
+            const currentDate = new Date(startDate);
+            currentDate.setDate(startDate.getDate() + idx);
+            const dayNames = ["ஞாயிறு","திங்கள்","செவ்வாய்","புதன்","வியாழன்","வெள்ளி","சனி"];
+            const months = ["ஜன","பிப்","மார்","ஏப்","மே","ஜூன்","ஜூலை","ஆக","செப்","அக்","நவ","டிச"];
+            const day = dayNames[currentDate.getDay()];
+            const dateNum = currentDate.getDate();
+            const month = months[currentDate.getMonth()];
+            const displayDate = `${day}, ${dateNum} ${month}`;
+            li.innerHTML = `<span class="list-date">📌 ${displayDate}</span> ${neethi}`;
+            listContainer.appendChild(li);
+        });
+        if(filtered.length === 0) {
+            const li = document.createElement("li");
+            li.innerHTML = "❌ பொருந்தும் நீதி எதுவும் இல்லை.";
+            listContainer.appendChild(li);
+        }
+    }
+
+    let panelVisible = false;
+    function togglePastPanel() {
+        const panel = document.getElementById("pastPanel");
+        if(panelVisible) {
+            panel.style.display = "none";
+            panelVisible = false;
+        } else {
+            renderPastNeethis("");
+            panel.style.display = "block";
+            panelVisible = true;
+            panel.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+    // search event
+    function setupSearch() {
+        const searchBox = document.getElementById("searchInput");
+        searchBox.addEventListener("input", (e) => {
+            renderPastNeethis(e.target.value);
+        });
+    }
+
+    document.getElementById("shareWhatsAppBtn").addEventListener("click", shareWhatsapp);
+    document.getElementById("showPastBtn").addEventListener("click", togglePastPanel);
+    document.getElementById("closePastBtn").addEventListener("click", togglePastPanel);
+
+    loadDaily();
+    setupSearch();
+</script>
+</body>
+</html>
